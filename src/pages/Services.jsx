@@ -8,7 +8,7 @@ import s3 from "../components/images/s3.png";
 const Services = () => {
   const navigate = useNavigate(); // Hook për navigimin
 
-  // Lista e shërbimeve
+
   const services = [
     {
       id: 1,
@@ -33,14 +33,14 @@ const Services = () => {
     },
   ];
 
-  // Funksioni për navigimin te shërbimi i detajuar
+  
   const handleReadMore = (id) => {
-    navigate(`/services/${id}`); // Navigo te rruga përkatëse
+    navigate(`/services/${id}`); 
   };
 
   return (
     <Container sx={{ padding: "2rem 0" }}>
-      {/* Titulli kryesor */}
+     
       <Typography
         variant="h4"
         align="center"
@@ -53,7 +53,7 @@ const Services = () => {
         Our <span style={{ color: "#0056b3", fontWeight: "bold" }}>Services</span>
       </Typography>
 
-      {/* Përshkrimi */}
+
       <Typography
         variant="body1"
         align="center"
@@ -66,11 +66,10 @@ const Services = () => {
         Explore our wide range of professional services designed to meet your needs.
       </Typography>
 
-      {/* Lista e shërbimeve */}
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" }, // Flex direction ndryshon sipas madhësisë së ekranit
+          flexDirection: { xs: "column", sm: "row" }, 
           flexWrap: "wrap",
           gap: 4,
           justifyContent: "center",
@@ -80,9 +79,9 @@ const Services = () => {
           <Box
             key={service.id}
             sx={{
-              width: { xs: "100%", sm: "45%", md: "30%" }, // Rregullo gjerësinë në varësi të ekranit
+              width: { xs: "100%", sm: "45%", md: "30%" }, 
               maxWidth: 400,
-              margin: "0 auto", // Siguron që kartat janë të qendruara
+              margin: "0 auto", 
             }}
           >
             <Card
@@ -94,7 +93,7 @@ const Services = () => {
               }}
             >
               <CardContent>
-                {/* Imazhi i shërbimit */}
+               
                 <img
                   src={service.image}
                   alt={service.title}
@@ -106,7 +105,7 @@ const Services = () => {
                   }}
                 />
 
-                {/* Titulli */}
+              
                 <Typography
                   variant="h6"
                   sx={{
@@ -118,7 +117,7 @@ const Services = () => {
                   {service.title}
                 </Typography>
 
-                {/* Përshkrimi */}
+               
                 <Typography
                   variant="body2"
                   sx={{
@@ -130,7 +129,6 @@ const Services = () => {
                   {service.description}
                 </Typography>
 
-                {/* Butoni "Read More" */}
                 <Button
                   sx={{
                     textTransform: "none",
@@ -142,7 +140,7 @@ const Services = () => {
                       color: "blue",
                     },
                   }}
-                  onClick={() => handleReadMore(service.id)} // Navigimi me ID
+                  onClick={() => handleReadMore(service.id)} 
                 >
                   Read More
                 </Button>
@@ -151,7 +149,7 @@ const Services = () => {
           </Box>
         ))}
 
-        {/* Butoni View More */}
+       
         <Box
           sx={{
             width: "100%",
@@ -164,7 +162,7 @@ const Services = () => {
             variant="contained"
             color="primary"
             sx={{
-              width: { xs: "100%", sm: "auto" }, // Butoni merr të gjithë hapësirën në ekranet më të vogla
+              width: { xs: "100%", sm: "auto" }, 
               padding: "10px 20px",
               fontWeight: "bold",
             }}

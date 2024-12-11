@@ -5,7 +5,7 @@ import { Facebook, Twitter, LinkedIn, Instagram, YouTube } from "@mui/icons-mate
 
 const teamMembers = [
   {
-    name: "Joseph Brown",
+    name: "Ardian Halilaj",
     role: "Marketing Head",
     image: "https://projekti-final-bit.netlify.app/images/team-1.jpg",
     social: {

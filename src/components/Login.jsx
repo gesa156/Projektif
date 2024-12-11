@@ -1,101 +1,88 @@
-import { useRef, useState, useEffect } from 'react';
-import useAuth from '../hooks/useAuth';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-
-import axios from '../api/axios';
-const LOGIN_URL = '/auth';
+import { useState } from "react";
+import { TextField, Button, Box, Typography, Paper, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Importo useNavigate
 
 const Login = () => {
-    const { setAuth } = useAuth();
+  const [user, setUser] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate(); // Inicializo navigate
 
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const userExists = users.find((u) => u.username === user && u.password === pwd);
 
-    const userRef = useRef();
-    const errRef = useRef();
-
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
-
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken });
-            setUser('');
-            setPwd('');
-            navigate(from, { replace: true });
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
-        }
+    if (!userExists) {
+      setErrMsg("Invalid username or password.");
+      return;
     }
 
-    return (
+    // Kur login-i të jetë i suksesshëm, ruajmë përdoruesin dhe drejtojmë te dashboard
+    localStorage.setItem("currentUser", JSON.stringify(userExists));
+    setSuccess(true);
+    setUser('');
+    setPwd('');
+    setErrMsg('');
+   
+    navigate('/dashboard'); 
+  };
 
-        <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
+  return (
+    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#f9f9f9" }}>
+      <Paper elevation={3} sx={{ padding: 4, maxWidth: 500 }}>
+        {success ? (
+          <Typography variant="h5" align="center" color="success.main">
+            Login successful! <br />
+            <a href="/dashboard" style={{ textDecoration: "none", color: "#1976d2" }}>Go to Dashboard</a>
+          </Typography>
+        ) : (
+          <>
+            {errMsg && (
+              <Alert severity="error" sx={{ marginBottom: 2 }} tabIndex={-1}>
+                {errMsg}
+              </Alert>
+            )}
+            <Typography variant="h5" align="center" gutterBottom>Login</Typography>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
-                    required
-                />
-
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
-                    required
-                />
-                <button>Sign In</button>
+              <TextField
+                fullWidth
+                label="Username"
+                variant="outlined"
+                margin="normal"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+                required
+              />
+              <TextField
+                fullWidth
+                label="Password"
+                type="password"
+                variant="outlined"
+                margin="normal"
+                value={pwd}
+                onChange={(e) => setPwd(e.target.value)}
+                required
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{ marginTop: 2 }}
+              >
+                Login
+              </Button>
             </form>
-            <p>
-                Need an Account?<br />
-                <span className="line">
-                    <Link to="/register">Sign Up</Link>
-                </span>
-            </p>
-        </section>
+            <Typography variant="body2" align="center" sx={{ marginTop: 2 }}>
+              Not registered yet? <a href="/register" style={{ textDecoration: "none", color: "#1976d2" }}>Sign Up</a>
+            </Typography>
+          </>
+        )}
+      </Paper>
+    </Box>
+  );
+};
 
-    )
-}
-
-export default Login
+export default Login;

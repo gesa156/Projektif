@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
-import About from "./About";  // Importo faqet që ke gati
+import About from "./About";  
 import Services from "./Services";
 import Whyus from "./Whyus";
 import Team from "./Team";
@@ -50,7 +50,7 @@ const ImageContainer = styled(Box)(({ theme }) => ({
   animation: "moveUpDown 5s ease-in-out infinite",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
-    height: "40%",  // Ulni lartësinë për ekranet e vogla
+    height: "40%",  
   },
 }));
 

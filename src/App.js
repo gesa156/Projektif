@@ -17,10 +17,6 @@ import Error from './pages/Error';
 
 
 
-
-
-
-
 const App = () => {
   return (
     
@@ -36,6 +32,7 @@ const App = () => {
           <Route path="/customers" element={<Customers />} />
           <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path="/register" element={<Register />} />
           <Route path="/*" element={<Error />} />
 

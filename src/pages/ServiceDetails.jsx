@@ -49,7 +49,7 @@ const ServiceDetails = () => {
     },
   ];
 
-  // Gjej shërbimin përkatës
+
   const service = services.find((service) => service.id.toString() === id);
 
   if (!service) {
@@ -64,12 +64,12 @@ const ServiceDetails = () => {
 
   return (
     <Container sx={{ padding: "2rem 0" }}>
-      {/* Header Kryesor */}
+ 
       <Box
         sx={{
           textAlign: "center",
           padding: "2rem",
-          backgroundColor: "#003366", // Ngjyrë e kaltër e errët
+          backgroundColor: "#003366", 
           color: "#ffffff",
           borderRadius: "12px",
           marginBottom: "2rem",
@@ -83,13 +83,13 @@ const ServiceDetails = () => {
         </Typography>
       </Box>
 
-      {/* Përshkrimi i Plotë */}
+     
       <Paper
         elevation={4}
         sx={{
           padding: "2rem",
           borderRadius: "12px",
-          backgroundColor: "#e3f2fd", // Ngjyra e kaltër e lehtë
+          backgroundColor: "#e3f2fd", 
           marginBottom: "2rem",
         }}
       >
@@ -97,7 +97,7 @@ const ServiceDetails = () => {
           variant="h5"
           sx={{
             fontWeight: "bold",
-            color: "#003366", // Ngjyra e kaltër e errët
+            color: "#003366", 
             marginBottom: "1rem",
           }}
         >
@@ -120,7 +120,7 @@ const ServiceDetails = () => {
         sx={{
           marginY: "2rem",
           padding: "1.5rem",
-          backgroundColor: "#bbdefb", // Ngjyra e kaltër më e lehtë
+          backgroundColor: "#bbdefb", 
           borderRadius: "12px",
         }}
       >
@@ -151,7 +151,7 @@ const ServiceDetails = () => {
                   variant="body1"
                   sx={{
                     fontSize: "1rem",
-                    color: "#003366", // Ngjyra e kaltër e errët
+                    color: "#003366", 
                     fontWeight: 500,
                   }}
                 >
@@ -163,21 +163,21 @@ const ServiceDetails = () => {
         </Grid>
       </Box>
 
-      {/* Butoni për Kthim */}
+     
       <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#003366", // Ngjyra e kaltër e errët
+            backgroundColor: "#003366", 
             color: "#ffffff",
             textTransform: "none",
             padding: "0.75rem 2rem",
             fontSize: "1rem",
             "&:hover": {
-              backgroundColor: "#002244", // Ngjyra e kaltër shumë e errët
+              backgroundColor: "#002244", 
             },
           }}
-          onClick={() => navigate(-1)} // Kthim prapa
+          onClick={() => navigate(-1)} 
         >
           Go Back
         </Button>
